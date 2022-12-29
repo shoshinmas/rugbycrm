@@ -14,14 +14,16 @@ class Payments
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
     private int $id;
-    #[ORM\Column(type: 'integer')]
-    private int $userId;
-    #[ORM\Column(type: 'String')]
-    private String $month;
+    #[ORM\Column(type: 'string')]
+    private string $month;
     #[ORM\Column(type: 'integer')]
     private int $amount;
-    #[ORM\Column(type: 'String')]
-    private String $byWhat;
+    #[ORM\Column(type: 'string')]
+    private string $byWhat;
+
+    #[ORM\ManyToOne(inversedBy: 'sumOfPayments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Players $playerPaymentsId = null;
 
     /**
      * @return int
@@ -40,23 +42,7 @@ class Payments
     }
 
     /**
-     * @return int
-     */
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param int $userId
-     */
-    public function setUserId(int $userId): void
-    {
-        $this->userId = $userId;
-    }
-
-    /**
-     * @return String
+     * @return string
      */
     public function getMonth(): string
     {
@@ -64,7 +50,7 @@ class Payments
     }
 
     /**
-     * @param String $month
+     * @param string $month
      */
     public function setMonth(string $month): void
     {
@@ -88,7 +74,7 @@ class Payments
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getByWhat(): string
     {
@@ -96,11 +82,23 @@ class Payments
     }
 
     /**
-     * @param String $byWhat
+     * @param string $byWhat
      */
     public function setByWhat(string $byWhat): void
     {
         $this->byWhat = $byWhat;
+    }
+
+    public function getPlayerPaymentsId(): ?Players
+    {
+        return $this->playerPaymentsId;
+    }
+
+    public function setPlayerPaymentsId(?Players $playerPaymentsId): self
+    {
+        $this->playerPaymentsId = $playerPaymentsId;
+
+        return $this;
     }
 
 

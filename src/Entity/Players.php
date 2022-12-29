@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\PlayersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlayersRepository::class)]
@@ -14,18 +16,24 @@ class Players
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
     private int $id;
-    #[ORM\Column(type: 'String')]
-    private String $firstname;
-    #[ORM\Column(type: 'String')]
-    private String $lastname;
-    #[ORM\Column(type: 'integer')]
-    private int $sumOfPayments;
+    #[ORM\Column(type: 'string')]
+    private string $firstname;
+    #[ORM\Column(type: 'string')]
+    private string $lastname;
     #[ORM\Column(type: 'boolean')]
     private bool $paidCurrentMonth;
 
     #[ORM\ManyToOne(inversedBy: 'playerId')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Clubs $clubId = null;
+
+    #[ORM\OneToMany(mappedBy: 'playerPaymentsId', targetEntity: Payments::class)]
+    private Collection $sumOfPayments;
+
+    public function __construct()
+    {
+        $this->sumOfPayments = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -44,7 +52,7 @@ class Players
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getFirstname(): string
     {
@@ -52,7 +60,7 @@ class Players
     }
 
     /**
-     * @param String $firstname
+     * @param string $firstname
      */
     public function setFirstname(string $firstname): void
     {
@@ -60,7 +68,7 @@ class Players
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getLastname(): string
     {
@@ -68,28 +76,11 @@ class Players
     }
 
     /**
-     * @param String $lastname
+     * @param string $lastname
      */
     public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getSumOfPayments(): int
-    {
-        return $this->sumOfPayments;
-    }
-
-    /**
-     * @param int $sumOfPayments
-     */
-    public function setSumOfPayments(int $sumOfPayments): void
-    {
-        $this->sumOfPayments = $sumOfPayments;
     }
 
     /**
@@ -116,6 +107,36 @@ class Players
     public function setClubId(?Clubs $clubId): self
     {
         $this->clubId = $clubId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Payments>
+     */
+    public function getSumOfPayments(): Collection
+    {
+        return $this->sumOfPayments;
+    }
+
+    public function addSumOfPayment(Payments $sumOfPayment): self
+    {
+        if (!$this->sumOfPayments->contains($sumOfPayment)) {
+            $this->sumOfPayments->add($sumOfPayment);
+            $sumOfPayment->setPlayerPaymentsId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSumOfPayment(Payments $sumOfPayment): self
+    {
+        if ($this->sumOfPayments->removeElement($sumOfPayment)) {
+            // set the owning side to null (unless already changed)
+            if ($sumOfPayment->getPlayerPaymentsId() === $this) {
+                $sumOfPayment->setPlayerPaymentsId(null);
+            }
+        }
 
         return $this;
     }

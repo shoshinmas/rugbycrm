@@ -16,16 +16,16 @@ class Clubs
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
     private int $id;
-    #[ORM\Column(type: 'String')]
-    private String $clubName;
-    #[ORM\Column(type: 'String')]
-    private String $streetAddress;
-    #[ORM\Column(type: 'String')]
-    private String $zipCode;
-    #[ORM\Column(type: 'String')]
-    private String $city;
-    #[ORM\Column(type: 'String')]
-    private String $country;
+    #[ORM\Column(type: 'string')]
+    private string $clubName;
+    #[ORM\Column(type: 'string')]
+    private string $streetAddress;
+    #[ORM\Column(type: 'string')]
+    private string $zipCode;
+    #[ORM\Column(type: 'string')]
+    private string $city;
+    #[ORM\Column(type: 'string')]
+    private string $country;
 
     #[ORM\OneToMany(mappedBy: 'clubId', targetEntity: Players::class)]
     private Collection $playerId;
@@ -53,7 +53,7 @@ class Clubs
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getClubName(): string
     {
@@ -61,7 +61,7 @@ class Clubs
     }
 
     /**
-     * @param String $clubName
+     * @param string $clubName
      */
     public function setClubName(string $clubName): void
     {
@@ -69,7 +69,7 @@ class Clubs
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getStreetAddress(): string
     {
@@ -77,7 +77,7 @@ class Clubs
     }
 
     /**
-     * @param String $streetAddress
+     * @param string $streetAddress
      */
     public function setStreetAddress(string $streetAddress): void
     {
@@ -85,7 +85,7 @@ class Clubs
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getZipCode(): string
     {
@@ -93,7 +93,7 @@ class Clubs
     }
 
     /**
-     * @param String $zipCode
+     * @param string $zipCode
      */
     public function setZipCode(string $zipCode): void
     {
@@ -101,7 +101,7 @@ class Clubs
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getCity(): string
     {
@@ -109,7 +109,7 @@ class Clubs
     }
 
     /**
-     * @param String $city
+     * @param string $city
      */
     public function setCity(string $city): void
     {
@@ -117,7 +117,7 @@ class Clubs
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getCountry(): string
     {
@@ -125,7 +125,7 @@ class Clubs
     }
 
     /**
-     * @param String $country
+     * @param string $country
      */
     public function setCountry(string $country): void
     {

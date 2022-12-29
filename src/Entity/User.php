@@ -14,15 +14,15 @@ class User
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
     private int $id;
-    #[ORM\Column(type: 'String')]
+    #[ORM\Column(type: 'string')]
     private String $username;
-    #[ORM\Column(type: 'String')]
+    #[ORM\Column(type: 'string')]
     private String $fName;
-    #[ORM\Column(type: 'String')]
+    #[ORM\Column(type: 'string')]
     private String $sName;
-    #[ORM\Column(type: 'String')]
+    #[ORM\Column(type: 'string')]
     private String $type;
-    #[ORM\Column(type: 'String')]
+    #[ORM\Column(type: 'string')]
     private String $status;
     #[ORM\Column(type: 'string')]
     private array $balance;
@@ -44,7 +44,7 @@ class User
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getUsername(): string
     {
@@ -52,7 +52,7 @@ class User
     }
 
     /**
-     * @param String $username
+     * @param string $username
      */
     public function setUsername(string $username): void
     {
@@ -60,7 +60,7 @@ class User
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getFName(): string
     {
@@ -68,7 +68,7 @@ class User
     }
 
     /**
-     * @param String $fName
+     * @param string $fName
      */
     public function setFName(string $fName): void
     {
@@ -76,7 +76,7 @@ class User
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getSName(): string
     {
@@ -84,7 +84,7 @@ class User
     }
 
     /**
-     * @param String $sName
+     * @param string $sName
      */
     public function setSName(string $sName): void
     {
@@ -100,7 +100,7 @@ class User
     }
 
     /**
-     * @param String $type
+     * @param string $type
      */
     public function setType(string $type): void
     {
@@ -108,7 +108,7 @@ class User
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getStatus(): string
     {
@@ -116,7 +116,7 @@ class User
     }
 
     /**
-     * @param String $status
+     * @param string $status
      */
     public function setStatus(string $status): void
     {
