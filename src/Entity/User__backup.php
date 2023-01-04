@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\UserRepositoryBackup;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\Entity(repositoryClass: UserRepositoryBackup::class)]
+class UserBackup
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
